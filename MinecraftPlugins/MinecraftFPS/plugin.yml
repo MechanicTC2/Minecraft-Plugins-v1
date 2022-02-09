@@ -1,7 +1,0 @@
-main: com.nathan.fps.Main
-name: nathan_fps
-description: nathans fps testing playground
-version: 1.0
-api-version: 1.17
-commands:
-  player:

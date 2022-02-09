@@ -1,7 +1,0 @@
-main: com.aaron.plugins.Main
-name: aaronMC
-description: aarons custom MC
-version: 1.1
-api-version: 1.17
-commands:
-  player:
