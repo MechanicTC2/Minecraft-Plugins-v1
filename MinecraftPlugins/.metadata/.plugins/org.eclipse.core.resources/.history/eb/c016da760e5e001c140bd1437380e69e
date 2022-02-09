@@ -1,0 +1,19 @@
+package com.minecraft.plugins;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+
+public class OtherStuff {
+
+	public void createHole() {
+		Location first = new Location(Bukkit.getWorld("world"), -700, 60, -365);
+		Location second = new Location(Bukkit.getWorld("world"), -690, 40, -355 );
+		Cuboid hole = new Cuboid(first, second);
+		
+		for (Block block : hole) {
+			block.setType(Material.AIR);
+		}
+	}
+}

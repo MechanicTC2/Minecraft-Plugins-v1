@@ -1,0 +1,14 @@
+package com.minecraft.plugins;
+
+import org.bukkit.Location;
+import org.bukkit.Material;
+
+
+public class Portal extends OtherStuff {
+	private Location loc;
+	private Material material;
+	public Portal(Location loc, Material material) {
+		this.loc = loc;
+		this.material = material;
+	}
+}

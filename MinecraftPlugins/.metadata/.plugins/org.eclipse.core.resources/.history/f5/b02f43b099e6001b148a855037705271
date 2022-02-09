@@ -1,0 +1,8 @@
+main: com.nathan.plugins.Main
+name: nathan_plugins
+description: nathan plugins testing playground
+version: 1.0
+api-version: 1.17
+commands: 
+  gravity:
+  reset_gravity:

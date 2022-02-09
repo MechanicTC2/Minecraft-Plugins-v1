@@ -1,0 +1,45 @@
+package com.customMC.plugins;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
+
+public class Listeners implements Listener {
+
+	//Sets the player count to zero, before anyone joins the server
+	int playerCount = 0;
+	
+	//Declares a string that is saved for each player that joins the server
+	String name = "";
+	
+	//Declares a variable for each player that joins the server
+	@EventHandler
+	public void onPlayerJoin(PlayerJoinEvent event) {
+		/* String player = event.getPlayer().getPlayerListName();
+		playerCount = playerCount + 1;
+		String yes = player + String.valueOf(playerCount);
+		event.getPlayer().sendMessage(yes);	*/
+		
+		for (Player player : Bukkit.getOnlinePlayers());
+		
+	}
+	
+	@EventHandler
+	public void onPlayerDeath(PlayerDeathEvent event) {
+		
+	}
+
+	@EventHandler
+	public void onPlayerRespawn(PlayerRespawnEvent event) {
+		if (playerCount == 0) {
+			
+		}
+	}
+	
+}
+
+

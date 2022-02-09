@@ -1,0 +1,7 @@
+INDEX VERSION 1.131+C:\Users\Ninja\Desktop\MC\MinecraftPlugins\.metadata\.plugins\org.eclipse.jdt.core
+286606776.index
+3893462376.index
+3928337611.index
+798129661.index
+3413725848.index
+1865797976.index

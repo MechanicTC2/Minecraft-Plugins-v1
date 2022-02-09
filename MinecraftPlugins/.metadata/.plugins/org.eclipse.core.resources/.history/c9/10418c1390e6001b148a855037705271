@@ -1,0 +1,5 @@
+main: com.nathan.plugins.Main
+name: nathan_plugins
+description: nathan plugins testing playground
+version: 1.0
+commands: 

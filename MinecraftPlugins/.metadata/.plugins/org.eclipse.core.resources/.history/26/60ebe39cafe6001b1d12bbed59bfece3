@@ -1,0 +1,22 @@
+package com.nathan.plugins;
+
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class Main extends JavaPlugin {
+	
+	@Override
+	public void onEnable() {
+		System.out.println("Your plugin is now enabled. - Nathan");
+		
+		getCommand("gravity").setExecutor(new gravityCommand());
+		getCommand("reset_gravity").setExecutor(new resetgravityCommand());
+		getCommand("invisible").setExecutor(new invisibleCommand());
+		getCommand("reset_invisible").setExecutor(new reset_invisibleCommand());
+	}
+	
+	@Override
+	public void onDisable() {
+		System.out.println("Your plugin is now disabled. - Nathan");
+	}
+
+}

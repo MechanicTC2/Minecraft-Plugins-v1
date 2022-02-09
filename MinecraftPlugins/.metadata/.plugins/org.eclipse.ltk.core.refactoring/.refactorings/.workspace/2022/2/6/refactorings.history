@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;Minecraft/src/com/minecraft/plugins/Ray.java&apos;" deleteContents="false" description="Delete resource &apos;Minecraft/src/com/minecraft/plugins/Ray.java&apos;" element1="/Minecraft/src/com/minecraft/plugins/Ray.java" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1644074410429"/>
+</session>

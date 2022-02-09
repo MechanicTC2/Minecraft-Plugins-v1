@@ -1,0 +1,372 @@
+package com.nathan.fps;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Fireball;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockDamageEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.weather.WeatherChangeEvent;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitTask;
+
+import com.nathan.fps.Cuboid.CuboidDirection;
+
+
+
+public class FPSListeners extends OtherStuff implements Listener {
+	
+	Main plugin;
+	
+	public FPSListeners(Main plugin) {
+		this.plugin = plugin;
+	}
+	
+	@EventHandler
+	
+	public void onPlayerJoin(PlayerJoinEvent event) {
+		
+		Player player = (Player) event.getPlayer();
+		
+		BukkitTask join = new scheduleTask(event.getPlayer()).runTaskLater(plugin, 6*20);
+		player.getInventory().addItem(createShortCircuit());
+		player.getInventory().addItem(createMagicCompass());
+		
+
+	}
+	
+	@EventHandler
+	
+	public void Parkour(PlayerMoveEvent event) {
+		
+		Player player = (Player) event.getPlayer();
+		
+		if(ArenaPortalLocation.contains(player.getLocation()) == true) {
+			player.sendMessage("Teleporting to the Arena...");
+			player.teleport(InsideArena);
+		}
+		
+		if (ParkourPortalLocation.contains(player.getLocation()) == true) {
+			
+			player.sendMessage("Teleporting to the Parkour Place...");
+			player.teleport(InsideParkour);
+		}
+		
+		if (ParkourPlatform1.contains(player.getLocation()) == true) {
+			
+			ParkourPlatformC.getBlock().setType(Material.POLISHED_ANDESITE);
+		}
+		
+		if (ParkourPlatform2.contains(player.getLocation()) == true) {
+			
+			ParkourPlatformA.getBlock().setType(Material.AIR);
+			ParkourPlatformE.getBlock().setType(Material.POLISHED_ANDESITE);
+		}
+		
+		if (ParkourPlatform3.contains(player.getLocation()) == true) {
+			
+			ParkourPlatformC.getBlock().setType(Material.AIR);
+			ParkourPlatformG.getBlock().setType(Material.POLISHED_ANDESITE);
+		}
+		
+		if (ParkourPlatform4.contains(player.getLocation()) == true) {
+			
+			ParkourPlatformE.getBlock().setType(Material.AIR);
+			ParkourPlatformFinishA.getBlock().setType(Material.POLISHED_ANDESITE);
+		}
+		
+		if (ParkourPlatformFinish.contains(player.getLocation()) == true) {
+			
+			ParkourPlatformG.getBlock().setType(Material.AIR);
+		}
+		
+		
+	}
+	
+	@EventHandler
+	public void PlatformWall(PlayerMoveEvent event) {
+		
+		Player player = (Player) event.getPlayer();
+		
+		int y = (int) Stairs2.getBlock().getLocation().getY() - (int) Stairs1.getBlock().getLocation().getY();
+		
+			//Reset
+		
+			if ((StairsArea.contains(player.getLocation()) == false) && (StairsArea.outset(CuboidDirection.Both,10).contains(player.getLocation()) == false)) {
+				for (Block block : StairsSurrounding)
+					block.setType(Material.AIR);
+				for (Block block : Stairs)
+					block.setType(Material.POLISHED_ANDESITE);
+			}
+		
+			//Platform 
+		
+			if (StairsSurrounding.contains(player.getLocation()) == true) {
+
+				for(int a = 0; a < y; a++) {
+            	
+					//Create Platform
+					
+					if (StairsArea.shift(CuboidDirection.Up, a).contains(player.getLocation()) == true) {
+
+						Cuboid StairsPlatformAll = StairsPlatform;
+						StairsPlatformAll = StairsPlatformAll.shift(CuboidDirection.Up, a);
+						StairsPlatformAll = StairsPlatformAll.shift(CuboidDirection.East, a * 2);
+						//player.sendMessage(Integer.toString(a));
+						for (Block block : StairsPlatformAll) {
+							block.setType(Material.POLISHED_ANDESITE);
+						}
+						
+						if (a != 0 && a != 1) {
+							
+							StairsPlatformAll = StairsPlatformAll.shift(CuboidDirection.Down, 1);
+							StairsPlatformAll = StairsPlatformAll.shift(CuboidDirection.West, 2);
+	                        
+							for (Block block : StairsPlatformAll) {
+	                            block.setType(Material.AIR);
+							}
+	                    }
+						
+						 if (a != y - 1) {
+							 
+							StairsPlatformAll = StairsPlatformAll.shift(CuboidDirection.Up, 2);
+							StairsPlatformAll = StairsPlatformAll.shift(CuboidDirection.West, 4);
+			                    
+							for (Block block : StairsPlatformAll) {
+			                        block.setType(Material.AIR);
+			                }
+			             }
+					}
+				}
+			}
+		}
+	
+	@EventHandler
+	
+	public void LavaFall(PlayerMoveEvent event) {
+		
+		Location Player1 = event.getPlayer().getLocation();
+		Location Player2 = Player1;
+		Cuboid Player = new Cuboid(Player1, Player2);
+		
+		
+		
+		//Player = Player.outset(CuboidDirection.Horizontal, 2);
+		
+		/*for (Block block : Player.expand(CuboidDirection.Up, 1)) {
+			
+			if (block.getType().equals(Material.LAVA) == true) {
+				
+				block.setType(Material.AIR);
+			}		
+		}*/
+		
+		// works, but have to be fully in lava
+		
+		for (Block block : Player.expand(CuboidDirection.Down, 1)) {
+			
+			if (block.getType().equals(Material.LAVA) == true) {
+				
+				//event.getPlayer().sendMessage("Gravity false");
+				event.getPlayer().setGravity(false);
+			}
+			
+			else {
+				//event.getPlayer().sendMessage("Gravity true");
+				event.getPlayer().setGravity(true);
+			}
+			
+		}
+	}
+	
+	@EventHandler
+	public void onBreakEvent(BlockBreakEvent event) {
+		
+		Player player = (Player) event.getPlayer();
+		
+		if(ArenaLocation.contains(player.getLocation()) == true) {
+			event.setCancelled(true);
+			player.sendMessage("You cannot break blocks here!");
+		}
+		
+		if(ParkourLocation.contains(player.getLocation()) == true) {
+			event.setCancelled(true);
+			player.sendMessage("You cannot break blocks here!");
+		}
+		
+		//if (WorldLoc.contains(player.getLocation()) == true) {
+			//event.setCancelled(true);
+		//	player.sendMessage("You cannot break blocks here!");
+		//}
+	}
+	
+	@EventHandler
+	
+    public void MagicCompass(PlayerInteractEvent event) {
+	
+		Player player = event.getPlayer();
+		
+		if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
+			
+			if (event.getPlayer().getInventory().getItemInMainHand() != null) {
+				
+				ItemMeta CompassMeta = event.getPlayer().getInventory().getItemInMainHand().getItemMeta();
+				
+				if (CompassMeta.getDisplayName().equalsIgnoreCase(ChatColor.GOLD + "Directional Compass")) {
+			
+			        Location playerLocation = player.getLocation();
+			        Location playerDirection = player.getLocation().add(player.getLocation().getDirection().multiply(12));
+			        
+			        if (DirectionDectector(playerLocation,playerDirection).equals("North")) {
+
+			        	player.teleport(playerLocation.add(10, 0, 0));
+
+			        }
+			        
+			        if (DirectionDectector(playerLocation,playerDirection).equals("South")) {
+
+			        	player.teleport(playerLocation.add(-10, 0, 0));
+			        	
+			        }
+			        
+			        if (DirectionDectector(playerLocation,playerDirection).equals("East")) {
+
+			        	BukkitTask join = new scheduleTask(event.getPlayer()).runTaskLater(plugin, 5*20);
+			        	Bukkit.getWorld("world").setTime(0);
+			        	
+			        	
+			        }
+			        
+			        if (DirectionDectector(playerLocation,playerDirection).equals("West")) {
+
+			        	BukkitTask join = new scheduleTask(event.getPlayer()).runTaskLater(plugin, 5*20);
+			        	Bukkit.getWorld("world").setTime(12000);
+			        	
+			        }
+			        
+			        if (DirectionDectector(playerLocation,playerDirection).equals("Up")) {
+			        	
+			        	BukkitTask join = new scheduleTask(event.getPlayer()).runTaskLater(plugin, 5*20);
+			        	Bukkit.getWorld("world").setTime(6000);
+			        	
+			        }
+			        
+			        if (DirectionDectector(playerLocation,playerDirection).equals("Down")) {
+
+			        	Bukkit.getWorld("world").setTime(13000);
+			        }
+			}
+		}
+	}
+}
+	
+	@EventHandler
+	
+	public void preventPlacement(BlockPlaceEvent event) {
+		
+		Player player = (Player) event.getPlayer();
+		
+		if(ArenaLocation.contains(player.getLocation()) == true) {
+			event.setCancelled(true);
+			player.sendMessage("You cannot place blocks here!");
+		}
+		
+		if(ParkourLocation.contains(player.getLocation()) == true) {
+			event.setCancelled(true);
+			player.sendMessage("You cannot place blocks here!");
+		}
+	}
+	
+	@EventHandler
+	
+	public void shortCircuit(PlayerInteractEvent event) {
+		
+		Player player = (Player) event.getPlayer();
+		
+		if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
+			
+			if (player.getInventory().getItemInMainHand() != null) {
+				
+				ItemMeta ShortCircuitMeta = player.getInventory().getItemInMainHand().getItemMeta();
+				
+				if (ShortCircuitMeta.getDisplayName().equalsIgnoreCase(ChatColor.GOLD + "Short Circuit")) {
+				
+					Arrow arrow = player.launchProjectile(Arrow.class);
+					
+					arrow.setVelocity(player.getLocation().getDirection().multiply(5));
+					arrow.setDamage(1);
+					ammo = ammo - 5;
+					
+					if (ammo < 0) {
+						event.setCancelled(true);
+					}
+					
+				}
+			}
+		}
+		
+		if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+			
+				if (player.getInventory().getItemInMainHand() != null) {
+				
+					ItemMeta ShortCircuitMeta = player.getInventory().getItemInMainHand().getItemMeta();
+				
+					if (ShortCircuitMeta.getDisplayName().equalsIgnoreCase(ChatColor.GOLD + "Short Circuit")) {
+				
+						Fireball fireball = player.launchProjectile(Fireball.class);
+						fireball.setVisualFire(false);
+						fireball.setIsIncendiary(false);
+						fireball.setVelocity(player.getLocation().getDirection().multiply(5));
+						
+						ammo = ammo - 65;
+						
+						if (ammo < 0) {
+							event.setCancelled(true);
+						}
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	
+		public void returnToSpawnArena(BlockDamageEvent event) {
+		
+		Player player = (Player) event.getPlayer();
+		
+		if (event.getBlock().getLocation().equals(ArenaReturnToSpawn)) {
+			
+			player.sendMessage("Teleporting back to the Arena Portal...");
+			player.teleport(OutsideArenaPortal);
+			
+			}
+	
+		if (event.getBlock().getLocation().equals(ParkourReturnToSpawn)) {
+			
+				player.sendMessage("Teleporting back to the Parkour Portal...");
+				ParkourPlatformC.getBlock().setType(Material.AIR);
+				ParkourPlatformE.getBlock().setType(Material.AIR);
+				ParkourPlatformG.getBlock().setType(Material.AIR);
+				ParkourPlatformA.getBlock().setType(Material.POLISHED_ANDESITE);
+				player.teleport(OutsideParkourPortal);
+			}
+		}
+	
+	@EventHandler
+	
+		public void cancelWeather(WeatherChangeEvent event) {
+			event.setCancelled(true);
+
+		}
+	}

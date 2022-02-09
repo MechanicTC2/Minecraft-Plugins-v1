@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;MinecraftPlugins/src/com/nathan/plugins/resetgravityCommand.java&apos; to &apos;reset_gravityCommand.java&apos;" description="Rename resource &apos;resetgravityCommand.java&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/com/nathan/plugins/resetgravityCommand.java" name="reset_gravityCommand.java" stamp="1627084052591" updateReferences="true"/>
+</session>

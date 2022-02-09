@@ -1,0 +1,25 @@
+package com.minecraft.plugins;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+
+import com.minecraft.plugins.Cuboid.CuboidDirection;
+
+public class OtherStuff {
+
+	public void createHole() {
+		Location first = new Location(Bukkit.getWorld("world"), -700, 60, -365);
+		Location second = new Location(Bukkit.getWorld("world"), -690, 40, -355 );
+		Cuboid hole = new Cuboid(first, second);
+		Cuboid barrier = hole.expand(CuboidDirection.Both, 1);
+		
+		for (Block block : barrier) {
+			block.setType(Material.BARRIER);
+		}
+		for (Block block : hole) {
+			block.setType(Material.AIR);
+		}
+	}
+}

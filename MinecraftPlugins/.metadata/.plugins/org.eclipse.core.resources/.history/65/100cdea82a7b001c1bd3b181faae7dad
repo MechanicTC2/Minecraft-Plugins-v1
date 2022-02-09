@@ -1,0 +1,25 @@
+package com.minecraft.plugins;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+
+import com.minecraft.plugins.Cuboid.CuboidDirection;
+
+
+public class Portal extends OtherStuff {
+	public Portal() {
+	}
+	public void NetherPortal(int x1, int y1, int z1, int x2, int y2, int z2) {
+		Location loc1 = new Location(Bukkit.getWorld("world"), x1, y1, z1);
+		Location loc2 = new Location(Bukkit.getWorld("world"), x2, y2, z2);
+		Cuboid portal_cuboid = new Cuboid(loc1, loc2);
+		for (Block block : portal_cuboid) {
+			block.setType(Material.OBSIDIAN);
+		}
+		for (Block block : portal_cuboid.expand(CuboidDirection.Down, -1)) {
+			block.setType(Material.NETHER_PORTAL);
+		}
+	}
+}

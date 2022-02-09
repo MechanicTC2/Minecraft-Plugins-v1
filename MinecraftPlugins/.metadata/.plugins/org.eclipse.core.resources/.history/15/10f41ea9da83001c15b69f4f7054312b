@@ -1,0 +1,68 @@
+package com.minecraft.plugins;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.type.EndPortalFrame;
+
+import com.minecraft.plugins.Cuboid.CuboidDirection;
+
+
+public class Portal extends OtherStuff {
+	public void NetherPortal(double x1, double y1, double z1, double x2, double y2, double z2) {
+		Location loc1 = new Location(Bukkit.getWorld("world"), x1, y1, z1);
+		Location loc2 = new Location(Bukkit.getWorld("world"), x2, y2, z2);
+		Cuboid portal_cuboid = new Cuboid(loc1, loc2);
+		for (Block block : portal_cuboid) {
+			block.setType(Material.OBSIDIAN);
+		}
+		for (Block block : portal_cuboid.inset(CuboidDirection.Both, 1)) {
+			block.setType(Material.NETHER_PORTAL);
+		}
+	}
+	public void NetherPortal(Location loc1, Location loc2, BlockFace face) {
+		Cuboid portal_cuboid = new Cuboid(loc1, loc2);
+		for (Block block : portal_cuboid) {
+			block.setType(Material.OBSIDIAN);
+		}
+		for (Block block : portal_cuboid.inset(CuboidDirection.Both, 1)) {
+			block.setType(Material.NETHER_PORTAL);
+		}
+	}
+	public void EndPortal(Location loc1, Location loc2, BlockFace face) {
+		Cuboid portal_cuboid = new Cuboid(loc1, loc2);
+		for (Block block : portal_cuboid) {
+			block.setType(Material.END_PORTAL_FRAME);
+			EndPortalFrame frame = (EndPortalFrame) block.getBlockData();
+	        frame.setEye(true);
+	        block.setBlockData(frame);
+		}
+		for (Block block : portal_cuboid.inset(CuboidDirection.Both, 1)) {
+			block.setType(Material.END_PORTAL);
+		}
+		Location loc_replace1 = new Location(Bukkit.getWorld("world"), loc1.getX() + 4, loc1.getY(), loc1.getZ());
+		Location loc_replace2 = new Location(Bukkit.getWorld("world"), loc1.getX(), loc1.getY(), loc1.getZ() + 4);
+		loc_replace1.getBlock().setType(Material.AIR);
+		loc_replace2.getBlock().setType(Material.AIR);
+	}
+	public void EndPortal(double x1, double y, double z1, double x2, double z2) {
+		Location loc1 = new Location(Bukkit.getWorld("world"), x1, y, z1);
+		Location loc2 = new Location(Bukkit.getWorld("world"), x2, y, z2);
+		Cuboid portal_cuboid = new Cuboid(loc1, loc2);
+		for (Block block : portal_cuboid) {
+			block.setType(Material.END_PORTAL_FRAME);
+			EndPortalFrame frame = (EndPortalFrame) block.getBlockData();
+	        frame.setEye(true);
+	        block.setBlockData(frame);
+		}
+		for (Block block : portal_cuboid.inset(CuboidDirection.Both, 1)) {
+			block.setType(Material.END_PORTAL);
+		}
+		Location loc_replace1 = new Location(Bukkit.getWorld("world"), loc1.getX() + 4, loc1.getY(), loc1.getZ());
+		Location loc_replace2 = new Location(Bukkit.getWorld("world"), loc1.getX(), loc1.getY(), loc1.getZ() + 4);
+		loc_replace1.getBlock().setType(Material.AIR);
+		loc_replace2.getBlock().setType(Material.AIR);
+	}
+}

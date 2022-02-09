@@ -1,0 +1,55 @@
+package com.minecraft.plugins;
+
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class playerCommand extends OtherStuff implements CommandExecutor {
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		
+		Player player = (Player) sender;
+		
+		if (args[0].equalsIgnoreCase("pyramid")) {
+			if (args[1].equalsIgnoreCase("createHole")) {
+				createHole();
+				player.sendMessage("Created hole.");
+			}
+			
+			if (args[1].equalsIgnoreCase("reset")) {
+				if (args[2].equalsIgnoreCase("resetPyramid")) {
+					resetPyramid();
+					player.sendMessage("Reset.");
+				}
+			}
+			
+			if (args[1].equalsIgnoreCase("createPyramid")) {
+				createPyramid();
+				player.sendMessage("Pyramid built.");
+			}
+		}
+		if (args[0].equalsIgnoreCase("Portal")) {
+			if (args[1].equalsIgnoreCase("createNetherPortal")) {
+				int x1 = Integer.parseInt(args[2]);
+				int y1 = Integer.parseInt(args[3]);
+				int z1 = Integer.parseInt(args[4]);
+				int x2 = Integer.parseInt(args[5]);
+				int y2 = Integer.parseInt(args[6]);
+				int z2 = Integer.parseInt(args[7]);
+				createNetherPortal(x1, y1, z1, x2, y2, z2);
+			}
+			if (args[1].equalsIgnoreCase("getDirection")) {
+				player.sendMessage(getDirection(player.getLocation(), player.getLocation().add(player.getLocation().getDirection().multiply(10))));
+			}
+		}
+		if (args[0].equalsIgnoreCase("give")) {
+			if (args[1].equalsIgnoreCase("netherWand")) {
+				player.getInventory().addItem(netherWand());
+			}
+		}
+		return false;
+	}
+
+}

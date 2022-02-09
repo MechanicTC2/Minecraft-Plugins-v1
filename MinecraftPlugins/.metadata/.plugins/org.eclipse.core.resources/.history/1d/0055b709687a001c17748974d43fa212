@@ -1,0 +1,99 @@
+package com.minecraft.plugins;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+
+import com.minecraft.plugins.Cuboid.CuboidDirection;
+
+public class OtherStuff {
+
+	int interval;
+	
+	public void createHole() {
+		Location first = new Location(Bukkit.getWorld("world"), -700, 62, -365);
+		Location second = new Location(Bukkit.getWorld("world"), -690, 52, -355 );
+		Cuboid hole = new Cuboid(first, second);
+		Cuboid barrier = hole.outset(CuboidDirection.Both, 1);
+		
+		for (Block block : barrier) {
+			block.setType(Material.BARRIER);
+		}
+		for (Block block : hole) {
+			block.setType(Material.AIR);
+		}
+	}
+	public void resetPyramid() {
+		Location first = new Location(Bukkit.getWorld("world"), -700, 62, -365);
+		Location second = new Location(Bukkit.getWorld("world"), -690, 32, -355 );
+		Location top = new Location(Bukkit.getWorld("world"), -690, 62, -355 );
+		Cuboid hole = new Cuboid(first, second);
+		Cuboid barrier = hole.outset(CuboidDirection.Both, 1);
+		Cuboid ceiling = new Cuboid (first, top);
+		
+		for (Block block : barrier) {
+			block.setType(Material.AIR);
+		}
+		for (Block block : hole) {
+			block.setType(Material.AIR);
+		}
+		for (Block block : ceiling) {
+			block.setType(Material.WATER);
+		}
+	}
+	public void createPyramid() {
+		Location bottom1 = new Location(Bukkit.getWorld("world"), -700, 52, -365);
+		Location bottom2 = new Location(Bukkit.getWorld("world"), -690, 52, -355 );
+		Location beacon_top = new Location (Bukkit.getWorld("world"), -695, 57, -360);
+		Cuboid bottom = new Cuboid(bottom1, bottom2);
+		Cuboid beacon = new Cuboid(beacon_top, beacon_top);
+		for (interval = 0; interval < 5; interval++) {
+			for (Block block : bottom.shift(CuboidDirection.Up, interval).inset(CuboidDirection.Horizontal, interval)) {
+				block.setType(Material.NETHERITE_BLOCK);
+			}
+		}
+		for (Block block : beacon) {
+			block.setType(Material.BEACON);
+		}
+	}
+	public void readConfig(String reading_file) {
+		try {
+			File file = new File(reading_file);
+			Scanner file_reader = new Scanner(file);
+			while (file_reader.hasNextLine()) {
+				
+			}
+		} 
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	public void writeConfig(String writing_file, String txt) {
+		try {
+			FileWriter filewriter = new FileWriter(writing_file, false);
+			filewriter.write(txt);
+			filewriter.close();
+		}
+		
+		catch (IOException e) {
+			System.out.println("An error occured. -Kenneth");
+			e.printStackTrace();
+		}
+	}
+	public void createNetherPortal(double x1, double y1, double z1, double x2, double y2, double z2) {
+		Location loc1 = new Location(Bukkit.getWorld("world"), x1, y1, z1);
+		Location loc2 = new Location(Bukkit.getWorld("world"), x2, y2, z2);
+		Cuboid portal_cuboid = new Cuboid(loc1, loc2);
+		Portal portal = new Portal(portal_cuboid, Material.OBSIDIAN);
+		for (Block block : portal_cuboid) {
+			block.setType(Material.OBSIDIAN);
+		}
+	}
+}
