@@ -1,22 +1,36 @@
 # Minecraft-Plugins-v1
  
-## **MUST USE SPIGOT/BUKKIT SERVER**
+## MUST USE SPIGOT/BUKKIT SERVER
 
-First Java MC Plugin
+This is the very first project in Java that I made. It contains a few custom items.
 
-Has a Nether/End Wand:
+### Nether Wand
 
-Left/Right Click for portals.
+Left or right click to place a Nether portal up to 100 blocks away!
 
-Functioning RPG.
-
-Left Click for arrows that kill in a 3x3 radius and take 10 damage in a 5x5 radius.
-
-Commands:
-
+Command:
+```
 /player give netherwand
+```
 
+### End Wand
+
+Left or right click to place an End portal up to 100 blocks away!
+
+Command:
+```
 /player give endwand
+```
 
+### RPG
+
+Left click to fire a flaming projectile that insta-kills entities in a 3x3 block radius.
+
+Deals 10 hearts of damage to entities in a 5x5 block radius.
+
+Command:
+```
 /player give rpg
+```
 
+## MUST USE SPIGOT/BUKKIT SERVER
