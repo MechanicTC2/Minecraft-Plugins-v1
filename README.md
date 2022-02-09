@@ -1,8 +1,8 @@
-# Minecraft-Plugins-v1
+# Minecraft-Wand-Plugin-v1
  
 ## MUST USE SPIGOT/BUKKIT SERVER
 
-This is the very first project in Java that I made. It contains a few custom items.
+A custom wand Minecraft Plugin that creates portals.
 
 ### Nether Wand
 
