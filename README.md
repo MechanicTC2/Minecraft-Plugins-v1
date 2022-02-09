@@ -1,6 +1,6 @@
 # Minecraft-Plugins-v1
  
-# MUST USE SPIGOT/BUKKIT SERVER
+## **MUST USE SPIGOT/BUKKIT SERVER**
 
 First Java MC Plugin
 
