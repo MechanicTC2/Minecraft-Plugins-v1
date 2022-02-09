@@ -21,16 +21,6 @@ Command:
 ```
 /player give endwand
 ```
-
-### RPG
-
-Left click to fire a flaming projectile that insta-kills entities in a 3x3 block radius.
-
-Deals 10 hearts of damage to entities in a 5x5 block radius.
-
-Command:
-```
-/player give rpg
-```
+Enjoy!
 
 ## MUST USE SPIGOT/BUKKIT SERVER
