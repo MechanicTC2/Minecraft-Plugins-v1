@@ -68,35 +68,6 @@ public class OtherStuff {
 			block.setType(Material.BEACON);
 		}
 	}
-	public void readConfig(String reading_file) {
-		try {
-			File file = new File(reading_file);
-			Scanner file_reader = new Scanner(file);
-			while (file_reader.hasNextLine()) {
-				
-			}
-			file_reader.close();
-		} 
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-	public void writeConfig(String writing_file, String txt) {
-		try {
-			FileWriter filewriter = new FileWriter(writing_file, false);
-			filewriter.write(txt);
-			filewriter.close();
-		}
-		
-		catch (IOException e) {
-			System.out.println("An error occured. -Kenneth");
-			e.printStackTrace();
-		}
-	}
-	public String getDirection(Location loc1, Location loc2) {
-		DirectionDetector direct_detect = new DirectionDetector();
-		return direct_detect.DirectionDectector(loc1, loc2);
-	}
 	public ItemStack netherWand() {
 		ItemStack item = new ItemStack(Material.BLAZE_ROD);
 		ItemMeta meta = item.getItemMeta();
@@ -121,29 +92,6 @@ public class OtherStuff {
 		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		meta.setLore(lore);
 		item.setItemMeta(meta);
-		return item;
-	}
-	public ItemStack Glock17() {
-		ItemStack item = new ItemStack(Material.DISPENSER);
-		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(ChatColor.GOLD + "Glock 17");
-		List <String> lore = new ArrayList<>();
-		lore.add("17/17");
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		return item;
-	}
-	public ItemStack RPG() {
-        ItemStack item = new ItemStack(Material.DROPPER);
-        ItemMeta meta = item.getItemMeta();
-        List <String> lore = new ArrayList<>();
-		lore.add("1/1");
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setLore(lore);       
-        item.setItemMeta(meta);
 		return item;
 	}
 }
