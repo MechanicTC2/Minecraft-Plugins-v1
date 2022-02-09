@@ -4,12 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.Scanner;
-import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -19,7 +16,6 @@ import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
 
 import com.minecraft.plugins.Cuboid.CuboidDirection;
 
@@ -140,25 +136,14 @@ public class OtherStuff {
 		return item;
 	}
 	public ItemStack RPG() {
-        ItemStack skull = new ItemStack(Material.PLAYER_HEAD);
-        SkullMeta headMeta = (SkullMeta) skull.getItemMeta();
+        ItemStack item = new ItemStack(Material.DROPPER);
+        ItemMeta meta = item.getItemMeta();
         List <String> lore = new ArrayList<>();
 		lore.add("1/1");
-		headMeta.setUnbreakable(true);
-		headMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		headMeta.setLore(lore);
-        GameProfile profile = new GameProfile(UUID.randomUUID(),null);
-        //https://freshcoal.com/maincollection.php
-        profile.getProperties().put("textures", null);
-        Field field;
-        try {
-            field = headMeta.getClass().getDeclaredField("profile");
-            field.setAccessible(true);
-            field.set(headMeta, profile);
-        } catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException x) {
-            x.printStackTrace();
-
-        }
-        skull.setItemMeta(headMeta);
+		meta.setUnbreakable(true);
+		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		meta.setLore(lore);       
+        item.setItemMeta(meta);
+		return item;
 	}
 }
