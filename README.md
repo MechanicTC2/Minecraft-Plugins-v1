@@ -1,5 +1,7 @@
 # Minecraft-Plugins-v1
  
+# MUST USE SPIGOT/BUKKIT SERVER
+
 First Java MC Plugin
 
 Has a Nether/End Wand:
