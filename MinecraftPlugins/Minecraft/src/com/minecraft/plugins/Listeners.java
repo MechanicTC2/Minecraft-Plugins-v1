@@ -50,16 +50,10 @@ public class Listeners extends OtherStuff implements Listener {
 		Player player = event.getPlayer();
 		ItemMeta meta = player.getInventory().getItemInMainHand().getItemMeta();
 		if (meta.getDisplayName().equalsIgnoreCase(ChatColor.DARK_PURPLE + "End Wand")) {
-			if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {	
-				BlockFace face = BlockFace.WEST;					Location front2 = new Location(Bukkit.getWorld("world"), player.getTargetBlockExact(50).getX(), player.getTargetBlockExact(50).getY() + 1, player.getTargetBlockExact(50).getZ());
-				Location front3 = new Location(Bukkit.getWorld("world"), player.getTargetBlockExact(50).getX() + 4, player.getTargetBlockExact(50).getY() + 1, player.getTargetBlockExact(50).getZ() + 4);
-				Portal end_portal = new Portal();
-				end_portal.EndPortal(front2, front3, face);
-			}
 			if (event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
 				BlockFace face = BlockFace.NORTH;
 				Location front2 = player.getTargetBlockExact(50).getLocation();
-				Location front3 = new Location(Bukkit.getWorld("world"), player.getTargetBlockExact(50).getX() + 4, player.getTargetBlockExact(50).getY(), player.getTargetBlockExact(50).getZ() + 4);
+				Location front3 = new Location(Bukkit.getWorld("world"), player.getTargetBlockExact(50).getX() + 4, player.getTargetBlockExact(50).getY() + 1, player.getTargetBlockExact(50).getZ() + 4);
 				Portal end_portal = new Portal();
 				end_portal.EndPortal(front2, front3, face);
 			}
