@@ -11,24 +11,6 @@ public class playerCommand extends OtherStuff implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
 		Player player = (Player) sender;
-		
-		if (args[0].equalsIgnoreCase("pyramid")) {
-			if (args[1].equalsIgnoreCase("createHole")) {
-				createHole();
-				player.sendMessage("Created hole.");
-			}
-			if (args[1].equalsIgnoreCase("reset")) {
-				if (args[2].equalsIgnoreCase("resetPyramid")) {
-					resetPyramid();
-					player.sendMessage("Reset.");
-				}
-			}
-			
-			if (args[1].equalsIgnoreCase("createPyramid")) {
-				createPyramid();
-				player.sendMessage("Pyramid built.");
-			}
-		}
 		if (args[0].equalsIgnoreCase("Portal")) {
 			if (args[1].equalsIgnoreCase("createNetherPortal")) {
 				double x1 = Double.parseDouble(args[2]);
@@ -49,9 +31,6 @@ public class playerCommand extends OtherStuff implements CommandExecutor {
 				Portal end_portal = new Portal();
 				end_portal.EndPortal(x1, y1, z1, x2, z2);
 			}
-			if (args[1].equalsIgnoreCase("getDirection")) {
-				player.sendMessage(getDirection(player.getLocation(), player.getLocation().add(player.getLocation().getDirection().multiply(10))));
-			}
 		}
 		if (args[0].equalsIgnoreCase("give")) {
 			if (args[1].equalsIgnoreCase("netherWand")) {
@@ -59,12 +38,6 @@ public class playerCommand extends OtherStuff implements CommandExecutor {
 			}
 			if (args[1].equalsIgnoreCase("endWand")) {
 				player.getInventory().addItem(endWand());
-			}
-			if (args[1].equalsIgnoreCase("Glock17")) {
-				player.getInventory().addItem(Glock17());
-			}
-			if (args[1].equalsIgnoreCase("RPG")) {
-				player.getInventory().addItem(RPG());
 			}
 		}
 		return false;
