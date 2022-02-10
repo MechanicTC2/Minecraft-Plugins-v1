@@ -1,4 +1,4 @@
-# Minecraft-Wand-Plugin-v1
+# Minecraft-Wand-Plugin-v1.0
  
 ## MUST USE SPIGOT/BUKKIT SERVER
 
